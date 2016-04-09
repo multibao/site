@@ -28,21 +28,21 @@ En renseignant [...] dans la barre hypertexte      |   j'obtiens le résultat su
 --------|------
 http://multibao.org/#**orga/repo**/tree/master  |    Architecture "vide" de dev.multibao.org. Fonctionne pour les repos spécifiés par daktary. Je continue de chercher pourquoi.
 http://multibao.org/#**user/repo**/tree/master  |    Architecture "vide" de dev.multibao.org, comme en démo: dev.multibao.org/#alecoz/democracy-story/tree/master
-http://multibao.org/#**orga/repo**/tree/master/**dossier**  |    Architecture "vide" de dev.multibao.org, comme en démo: http://dev.multibao.org/#alecoz/democratie_ouverte/tree/master/contributions; la liste des fiches n'apparait pas
-http://multibao.org/#**user/repo**/tree/master/**dossier**  |    Architecture "vide" de dev.multibao.org
-http://multibao.org/#**orga/repo**/tree/master/**nomfiche.md**  |    Fonctionnel
-http://multibao.org/#**user/repo**/tree/master/**nomfiche.md**  |    Fonctionnel
-http://multibao.org/#**orga/repo**/tree/master/**dossier/nomfiche.md** |    Fonctionnel
-http://multibao.org/#**user/repo**/tree/master/**dossier/nomfiche.md**  |    Fonctionnel
-http://multibao.org/#**orga/repo**/tree/master/**dossier/dossier/nomfiche.md** |    Redirige parfois vers une page 404., comme en démo: dev.multibao.org/#multibao/contributions/blob/master/financements/subventions_2016/0-lisez-moi.md.  Je cherche pourquoi.
-http://multibao.org/#**user/repo**/tree/master/**dossier/dossier/nomfiche.md**  |    Redirige parfois vers une page 404, mais pas toujours. Je cherche pourquoi.
+http://multibao.org/#**orga/repo**/tree/master/**dossier**  |    Architecture "vide" de dev.multibao.org, comme en démo: http://dev.multibao.org/#alecoz/democratie_ouverte/tree/master/contributions; corrigé
+http://dev.multibao.org/#**user/repo**/tree/master/**dossier**  |    Architecture "vide" de dev.multibao.org
+http://dev.multibao.org/#**orga/repo**/blob/master/**nomfiche.md**  |    Fonctionnel
+http://dev.multibao.org/#**user/repo**/blob/master/**nomfiche.md**  |    Fonctionnel
+http://dev.multibao.org/#**orga/repo**/blob/master/**dossier/nomfiche.md** |    Fonctionnel
+http://dev.multibao.org/#**user/repo**/blob/master/**dossier/nomfiche.md**  |    Fonctionnel
+http://dev.multibao.org/#**orga/repo**/blob/master/**dossier/dossier/nomfiche.md** |  Corrigé 
+http://dev.multibao.org/#**user/repo**/blob/master/**dossier/dossier/nomfiche.md**  |  Corrigé
 
 ## Relatifs à la navigation 
 
 Fonctionnalité testée     |   Retours
 --------|------
 Naviguer dans la partie gauche: ouvrir organisations  |   Ok, sauf si nom de repo ne respectant pas la charte de nommage 
-Naviguer dans le breadcrum  |   Pour les orgas spécifiées dans daktary, fonctionne. Pour les orgas et fiches testées en les renseignant dans le lien hypertexte, ne fonctionne pas. Démo: http://dev.multibao.org/#scopyleft/trampolean/tree/master/pour-incubateurs/index.html. Voir retours liés au routeur. 
+Naviguer dans le breadcrum  |   Corrigé
 Utiliser le moteur de recherche  |   En cours de tests
 
 

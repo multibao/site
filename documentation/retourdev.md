@@ -45,6 +45,11 @@ Naviguer dans la partie gauche: ouvrir organisations  |   Ok, sauf si nom de rep
 Naviguer dans le breadcrum  |   Corrigé
 Utiliser le moteur de recherche  |   En cours de tests
 
+## Relatifs à l'intégration Anywhere
+
+Fonctionnalité testée     |   Retours
+--------|------
+Faire apparaître une fiche multiBàO sur un site web  |   N'apparaît pas. Exemple où le script http://moustic.info/2015/wakka.php?wiki=CercleSamoan/edit ne fonctionne pas. 
 
 ## Relatifs aux navigateurs faisant apparaitre http://dev.multibao.org
 
@@ -53,10 +58,11 @@ Navigateurs     |   Retours
 Firefox 45.0 (Ubuntu)  x5 |   Fonctionnel
 Firefox 45.0.1 (Windows) x2 |   Fonctionnel
 Firefox 46.0b4 x1 |   Fonctionnel
-Internet Explorer v 11.162 (Windows) x1 |   Page blanche
+Internet Explorer v 11.162 (Windows) x2 |   Page blanche
 Google Chome 49.0.2623.112 (Windows) x2 | Fonctionnel
 Google Chome 49.0.2623.110 (Windows) x1 | Fonctionnel
 Chrome Version 50.0.2661.49 (Mac) x1 | Fonctionnel
 Chromium / Version 49.0.2623.108 (Ubuntu) x1 | Fonctionnel
+Chromium / 48.0.2564.116 Ubuntu x1 | Page blanche
 Chrome 47.0.2526.83 (Android) x1 |   Page blanche
 Safari Version 9.1 (10601.5.17.4) x1 |   Page blanche

@@ -9,11 +9,6 @@ babel \
   ./src/lib/dk-template.js \
   ./src/config.js \
   ./src/init.js \
-<<<<<<< HEAD
-  ./src/layout-home.js \
-  ./src/layout-viewer.js \
-=======
->>>>>>> 227578f3e7bb295c3496af70d5fd6d1b175e16bd
   ./src/layout-folders.js \
   ./src/layout-home.js \
   ./src/layout-repositories.js \

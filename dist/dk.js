@@ -459,6 +459,12 @@ window.addEventListener('load', function () {
 });
 var template = new Template();
 var layout = new Layout();
+'use strict';
+
+{
+  layout.create('home');
+  layout.home.html('\n  <header class="clearfix">\n    <h1>multi<span>BàO</span></h1>\n    <div id="search-engine-wrapper" class="search-engine-wrapper" data-template="search">\n    </div>\n  </header>\n  <main>\n    <section class="home-intro">\n        <h2>Partager en équipe et au monde <span>ses apprentissages sur le faire ensemble</span></h2>\n        <a href="">Commencer ici</a>\n        <a href="">Guide d\'utilisation</a>\n    </section>\n    <section id="gh-crew-list" data-template="crews">\n    </section>\n  </main>');
+}
 /**
 * Layout for manage and display Github contribution.
 *

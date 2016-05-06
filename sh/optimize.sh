@@ -9,6 +9,7 @@ babel \
   ./src/lib/dk-template.js \
   ./src/lib/dk-markdown.js \
   ./src/init.js \
+  ./src/layout-home.js \
   ./src/layout-viewer.js \
   ./src/layout-folders.js \
   ./src/layout-repositories.js \

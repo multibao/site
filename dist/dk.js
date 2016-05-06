@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 'use strict';
 
 var GH_SECRET = 'M2NmYjI1YmNlOWE4MGFjN2E2NzIxZTg5YzkwMGVhZjM5NzEwN2Y2MA==';
@@ -23,6 +24,8 @@ var CREWS = { crews: [{ title: 'Bienvenue sur multiBàO',
     label: 'Onpassealacte',
     owner: 'onpassealacte'
   }] };
+=======
+>>>>>>> 227578f3e7bb295c3496af70d5fd6d1b175e16bd
 /**
    * An object to manage Github url.
    *
@@ -88,6 +91,112 @@ var GithubUrl = (function () {
   }]);
 
   return GithubUrl;
+})();
+'use strict';
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+var Lyt = (function () {
+  function Lyt() {
+    _classCallCheck(this, Lyt);
+
+    this._htmlTpl = '';
+  }
+
+  _createClass(Lyt, [{
+    key: '_getTemplateNames',
+    value: function _getTemplateNames() {
+      return Array.from(this._htmlTpl.querySelectorAll('[data-template]')).map(function (div) {
+        return div.getAttribute('data-template');
+      });
+    }
+  }, {
+    key: 'html',
+    value: function html(_html) {
+      var htmlTpl = document.createElement('template');
+      htmlTpl.innerHTML = _html;
+      this._htmlTpl = htmlTpl.content;
+    }
+  }, {
+    key: 'render',
+    value: function render(tpl) {
+      // to preserve this._htmlTpl after appendChild
+      var clone = document.importNode(this._htmlTpl, true);
+      document.querySelector('#container').innerHTML = '';
+      document.querySelector('#container').appendChild(clone);
+      this._getTemplateNames().map(function (tplName) {
+        if (!template.hasOwnProperty(tplName)) {
+          throw 'Template ' + tplName + ' is undefined';
+        }
+        return template[tplName].render();
+      });
+    }
+  }]);
+
+  return Lyt;
+})();
+
+var Layout = (function () {
+  function Layout() {
+    _classCallCheck(this, Layout);
+  }
+
+  _createClass(Layout, [{
+    key: 'create',
+    value: function create(name) {
+      this[name] = new Lyt();
+    }
+  }]);
+
+  return Layout;
+})();
+'use strict';
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _slicedToArray(arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i['return']) _i['return'](); } finally { if (_d) throw _e; } } return _arr; } else { throw new TypeError('Invalid attempt to destructure non-iterable instance'); } }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+var Markdown = (function () {
+  function Markdown(content) {
+    _classCallCheck(this, Markdown);
+
+    this.content = content;
+    this.metas = {};
+    if (this._isMetas()) {
+      this._extractMetas();
+    }
+  }
+
+  _createClass(Markdown, [{
+    key: '_isMetas',
+    value: function _isMetas() {
+      return !!this.content.match(/---([\s\S]*?)---/);
+    }
+  }, {
+    key: '_extractMetas',
+    value: function _extractMetas() {
+      var _this = this;
+
+      this.content.match(/---([\s\S]*?)---/)[1].split('\n').filter(function (elt) {
+        return elt.trim();
+      }).map(function (elt) {
+        var _elt$match = elt.match(/([\s\S]*?): (.*)/);
+
+        var _elt$match2 = _slicedToArray(_elt$match, 3);
+
+        var key = _elt$match2[1];
+        var value = _elt$match2[2];
+
+        _this.metas[key.trim()] = value.trim();
+      });
+    }
+  }]);
+
+  return Markdown;
 })();
 /**
    * A Router to manage client side url.
@@ -246,66 +355,6 @@ var Router = (function () {
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-var Lyt = (function () {
-  function Lyt() {
-    _classCallCheck(this, Lyt);
-
-    this._htmlTpl = '';
-  }
-
-  _createClass(Lyt, [{
-    key: '_getTemplateNames',
-    value: function _getTemplateNames() {
-      return Array.from(this._htmlTpl.querySelectorAll('[data-template]')).map(function (div) {
-        return div.getAttribute('data-template');
-      });
-    }
-  }, {
-    key: 'html',
-    value: function html(_html) {
-      var htmlTpl = document.createElement('template');
-      htmlTpl.innerHTML = _html;
-      this._htmlTpl = htmlTpl.content;
-    }
-  }, {
-    key: 'render',
-    value: function render(tpl) {
-      // to preserve this._htmlTpl after appendChild
-      var clone = document.importNode(this._htmlTpl, true);
-      document.querySelector('#container').innerHTML = '';
-      document.querySelector('#container').appendChild(clone);
-      this._getTemplateNames().map(function (tplName) {
-        if (!template.hasOwnProperty(tplName)) {
-          throw 'Template ' + tplName + ' is undefined';
-        }
-        return template[tplName].render();
-      });
-    }
-  }]);
-
-  return Lyt;
-})();
-
-var Layout = (function () {
-  function Layout() {
-    _classCallCheck(this, Layout);
-  }
-
-  _createClass(Layout, [{
-    key: 'create',
-    value: function create(name) {
-      this[name] = new Lyt();
-    }
-  }]);
-
-  return Layout;
-})();
-'use strict';
-
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
 function _slicedToArray(arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i['return']) _i['return'](); } finally { if (_d) throw _e; } } return _arr; } else { throw new TypeError('Invalid attempt to destructure non-iterable instance'); } }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
@@ -401,6 +450,7 @@ var Template = (function () {
 })();
 'use strict';
 
+<<<<<<< HEAD
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
 function _slicedToArray(arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i['return']) _i['return'](); } finally { if (_d) throw _e; } } return _arr; } else { throw new TypeError('Invalid attempt to destructure non-iterable instance'); } }
@@ -445,6 +495,35 @@ var Markdown = (function () {
 
   return Markdown;
 })();
+=======
+var GH_SECRET = 'M2NmYjI1YmNlOWE4MGFjN2E2NzIxZTg5YzkwMGVhZjM5NzEwN2Y2MA==';
+var GH_ID = 'NGEzOWM4YzE4NjA3NDkxNWU1NDY=';
+
+var CREWS = { crews: [{ title: 'Bienvenue sur multiBàO',
+    label: 'Accueil Multibao',
+    owner: 'multibao'
+  }, {
+    title: 'Réseau Transition BE',
+    label: 'association Réseau Transition Wallonie Bruxelles',
+    owner: 'reseautransitionwb'
+  }, {
+    title: 'Réseau Coop-tic',
+    label: 'associations Outils Réseaux (FR) et CRIE Mouscron (BE); établissement SupAgro Florac (FR)',
+    owner: 'supagroflorac'
+  }, {
+    title: 'Captain Berrotte',
+    label: 'stagiaires travaillant sur multiBàO',
+    owner: 'captain-berrotte'
+  }, {
+    title: 'Traducteurs agiles',
+    label: 'Les Traducteurs Agiles sont une communauté d’Agilistes et de … Traducteurs.',
+    owner: 'les-traducteurs-agiles'
+  }, {
+    title: 'Onpassealacte',
+    label: 'Media web citoyen montrant des initiatives positives en vidéos',
+    owner: 'onpassealacte'
+  }] };
+>>>>>>> 227578f3e7bb295c3496af70d5fd6d1b175e16bd
 'use strict';
 
 window.addEventListener('hashchange', function () {
@@ -466,16 +545,6 @@ var layout = new Layout();
   layout.home.html('\n  <header class="clearfix">\n    <h1>multi<span>BàO</span></h1>\n    <div id="search-engine-wrapper" class="search-engine-wrapper" data-template="search">\n    </div>\n  </header>\n  <main>\n    <section class="home-intro">\n        <h2>Partager en équipe et au monde <span>ses apprentissages sur le faire ensemble</span></h2>\n        <a href="">Commencer ici</a>\n        <a href="">Guide d\'utilisation</a>\n    </section>\n    <section id="gh-crew-list" data-template="crews">\n    </section>\n  </main>');
 }
 /**
-* Layout for manage and display Github contribution.
-*
-*/
-'use strict';
-
-{
-  layout.create('viewer');
-  layout.viewer.html('\n  <main>\n    <div id="parentRepo" class="breadcrumbs" data-template="parentRepo">\n    </div>\n    <article data-template="contribution" id="contribution">\n    </article>\n  </main>\n  ');
-}
-/**
  * Layout for manage and display Github repositories.
  *
  */
@@ -484,6 +553,12 @@ var layout = new Layout();
 {
   layout.create('folders');
   layout.folders.html('\n  <header>\n    <h1>multi<span>BàO</span></h1>\n    <div id="search-engine-wrapper" class="search-engine-wrapper" data-template="search">\n    </div>\n  </header>\n  <main>\n    <div id="breadcrumb" class="breadcrumb" data-template="breadcrumb">\n    </div>\n    <section id="gh-list" class="gh-list" data-template="folders">\n    </section>\n  </main>');
+}
+'use strict';
+
+{
+  layout.create('home');
+  layout.home.html('\n  <header class="clearfix">\n    <h1>multi<span>BàO</span></h1>\n    <div id="search-engine-wrapper" class="search-engine-wrapper" data-template="search">\n    </div>\n  </header>\n  <main>\n    <section class="home-intro">\n        <h2>Partager en équipe et au monde <span>ses apprentissages sur le faire ensemble</span></h2>\n        <a href="">Commencer ici</a>\n        <a href="">Guide d\'utilisation</a>\n    </section>\n    <section id="gh-crew-list" data-template="crews">\n    </section>\n  </main>');
 }
 /**
  * Layout for manage and display Github repositories.
@@ -504,6 +579,16 @@ var layout = new Layout();
 {
   layout.create('searchList');
   layout.searchList.html('\n  <header>\n    <h1>multi<span>BàO</span></h1>\n    <div id="search-engine-wrapper" class="search-engine-wrapper" data-template="search">\n    </div>\n  </header>\n  <main>\n    <section id="gh-list" class="gh-list" data-template="searchList">\n    </section>\n  </main>');
+}
+/**
+* Layout for manage and display Github contribution.
+*
+*/
+'use strict';
+
+{
+  layout.create('viewer');
+  layout.viewer.html('\n  <main>\n    <div id="parentRepo" class="breadcrumbs" data-template="parentRepo">\n    </div>\n    <article data-template="contribution" id="contribution">\n    </article>\n  </main>\n  ');
 }
 // Create a router
 'use strict';
@@ -537,6 +622,51 @@ router.route(':owner', function () {
 'use strict';
 
 {
+  template.create('breadcrumb');
+
+  template.breadcrumb.data = function () {
+    var _router$params = router.params;
+    var owner = _router$params.owner;
+    var repo = _router$params.repo;
+    var branch = _router$params.branch;
+    var path = _router$params.path;
+
+    var folders = [];
+    if (path) {
+      (function () {
+        var pathByFolder = [];
+        path.split('/').map(function (elt) {
+          pathByFolder.push('/' + elt);
+          folders.push({
+            link: '#' + owner + '/' + repo + '/tree/' + branch + '' + pathByFolder.join(''),
+            label: elt
+          });
+        });
+      })();
+    }
+    var _ownerTpl$repoTpl$foldersTpl = {
+      ownerTpl: {
+        label: owner,
+        link: '#' + owner
+      },
+      repoTpl: {
+        label: repo,
+        link: '#' + owner + '/' + repo + '/tree/' + branch
+      },
+      foldersTpl: folders
+    };
+    var ownerTpl = _ownerTpl$repoTpl$foldersTpl.ownerTpl;
+    var repoTpl = _ownerTpl$repoTpl$foldersTpl.repoTpl;
+    var foldersTpl = _ownerTpl$repoTpl$foldersTpl.foldersTpl;
+
+    template.breadcrumb.html('<ul>\n        <li><a href="/">Accueil</a></li>\n        <li><a href="' + ownerTpl.link + '">' + ownerTpl.label + '</a></li>\n        ' + (repoTpl.label ? '<li><a href="' + repoTpl.link + '">' + repoTpl.label + '</a></li>' : '') + foldersTpl.map(function (folder) {
+      return '<li><a href="' + folder.link + '">' + folder.label + '</a></li>';
+    }).join('\n') + '</ul>');
+  };
+}
+'use strict';
+
+{
   template.create('contribution');
 
   template.contribution.data = function () {
@@ -547,27 +677,6 @@ router.route(':owner', function () {
       template.contribution.html(html);
       template.contribution.renderAsync();
     });
-  };
-}
-'use strict';
-
-{
-  template.create('parentRepo');
-
-  template.parentRepo.data = function () {
-    var _router$params = router.params;
-    var owner = _router$params.owner;
-    var repo = _router$params.repo;
-    var branch = _router$params.branch;
-    var path = _router$params.path;
-    var _link$label = {
-      link: '#' + owner + '/' + repo + '/tree/' + branch + '/' + ('' + path.replace(/(\/|)[0-9A-Za-z\u00C0-\u017F\-\_\.]*$/, '')),
-      label: '' + owner + ' - ' + repo
-    };
-    var link = _link$label.link;
-    var label = _link$label.label;
-
-    template.parentRepo.html('À retrouver dans le dépôt : <a href="' + link + '">' + label + '</a>');
   };
 }
 /**
@@ -605,6 +714,7 @@ template.crews.data = function () {
 'use strict';
 
 {
+<<<<<<< HEAD
   template.create('search');
 
   template.search.data = function () {
@@ -675,6 +785,8 @@ template.crews.data = function () {
 'use strict';
 
 {
+=======
+>>>>>>> 227578f3e7bb295c3496af70d5fd6d1b175e16bd
   template.create('folders');
 
   template.folders.data = function () {
@@ -709,6 +821,27 @@ template.crews.data = function () {
 'use strict';
 
 {
+  template.create('parentRepo');
+
+  template.parentRepo.data = function () {
+    var _router$params = router.params;
+    var owner = _router$params.owner;
+    var repo = _router$params.repo;
+    var branch = _router$params.branch;
+    var path = _router$params.path;
+    var _link$label = {
+      link: '#' + owner + '/' + repo + '/tree/' + branch + '/' + ('' + path.replace(/(\/|)[0-9A-Za-z\u00C0-\u017F\-\_\.]*$/, '')),
+      label: '' + owner + ' - ' + repo
+    };
+    var link = _link$label.link;
+    var label = _link$label.label;
+
+    template.parentRepo.html('À retrouver dans le dépôt : <a href="' + link + '">' + label + '</a>');
+  };
+}
+'use strict';
+
+{
   template.create('repos');
 
   template.repos.data = function () {
@@ -729,6 +862,7 @@ template.crews.data = function () {
           return response.text();
         }).then(function (md) {
           var contribution = new Markdown(md);
+<<<<<<< HEAD
           contribution.fullMetas = contribution.metas;
           contribution.fullMetas.name = name;
           contribution.fullMetas.type = type;
@@ -746,11 +880,49 @@ template.crews.data = function () {
           dossiers = _contribution$fullMetas.dossiers;
           fiches = _contribution$fullMetas.fiches;
 
+=======
+          var url = html_url.replace('https://github.com/', '');
+          var git_url = html_url;
+          var readme_url = html_url.replace('https://github.com/', '') + '/blob/master/README.md';
+          var bandeau_url = contribution.metas.bandeau_url;
+          var description = contribution.metas.description;
+          var contributeurs = contribution.metas.contributeurs;
+          var dossiers = contribution.metas.dossiers;
+          var fiches = contribution.metas.fiches;
+>>>>>>> 227578f3e7bb295c3496af70d5fd6d1b175e16bd
           html.push('<article class="gh-list-item gh-type-repo">\n                    <h2 class="gh-list-title"><a href="#' + url + '">' + name + '</a></h2>\n                    <div class="gh-list-meta">\n                      <p>Dossiers : ' + dossiers + ' - Fiches : ' + fiches + '</p>\n                      <p>Contributeurs : ' + contributeurs + '</p>\n                      </p>\n                      <p>\n                        <a href="' + git_url + '">Voir sur Github</a>\n                      </p>\n                    </div>\n                    <img src="' + (bandeau_url ? bandeau_url : 'http://lorempixel.com/g/350/150/') + '">\n                    <p class="gh-list-excerpt">' + description + '</p>\n                    <a class="gh-list-readmore"\n                        title="Lire la suite de la fiche Titre de la fiche"\n                        href="#' + readme_url + '">Lire la présentation complète</a>\n                  </article>');
           template.repos.html(html.join('\n'));
           template.repos.renderAsync(template.repos._htmlTpl);
         });
       });
+<<<<<<< HEAD
+=======
+    });
+  };
+}
+'use strict';
+
+{
+  template.create('search');
+
+  template.search.data = function () {
+    template.search.html('\n      <div class="search-engine">\n        <fieldset>\n          <input id="gh-search" type="text" placeholder="Recherche">\n          <input id="button-gh-search" value="Rechercher" type="submit">\n        </fieldset>\n      </div>\n    ');
+    template.search.events({
+      'click #button-gh-search': function clickButtonGhSearch() {
+        if (document.querySelector('#gh-search').value.length > 2) {
+          var userQuery = document.querySelector('#gh-search').value;
+          var apiUrl = new GithubUrl(router.params).toGhApiSearch(userQuery);
+          router.go(apiUrl.replace('https://api.github.com/', ''));
+        }
+      },
+      'keypress #gh-search': function keypressGhSearch(evt) {
+        if (evt.key === 'Enter' && evt.target.value.length > 2) {
+          var userQuery = evt.target.value;
+          var apiUrl = new GithubUrl(router.params).toGhApiSearch(userQuery);
+          router.go(apiUrl.replace('https://api.github.com/', ''));
+        }
+      }
+>>>>>>> 227578f3e7bb295c3496af70d5fd6d1b175e16bd
     });
   };
 }

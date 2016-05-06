@@ -8,23 +8,19 @@ var CREWS = { crews: [{ title: 'Bienvenue sur multiBàO',
     owner: 'multibao'
   }, {
     title: 'Réseau Transition BE',
-    label: 'association Réseau Transition Wallonie Bruxelles',
+    label: 'Réseau Transition BE',
     owner: 'reseautransitionwb'
   }, {
     title: 'Réseau Coop-tic',
-    label: 'associations Outils Réseaux (FR) et CRIE Mouscron (BE); établissement SupAgro Florac (FR)',
+    label: 'Coop-TIC',
     owner: 'supagroflorac'
   }, {
-    title: 'Captain Berrotte',
-    label: 'stagiaires travaillant sur multiBàO',
-    owner: 'captain-berrotte'
-  }, {
     title: 'Traducteurs agiles',
-    label: 'Les Traducteurs Agiles sont une communauté d’Agilistes et de … Traducteurs.',
+    label: 'Traducteurs agiles',
     owner: 'les-traducteurs-agiles'
   }, {
     title: 'Onpassealacte',
-    label: 'Media web citoyen montrant des initiatives positives en vidéos',
+    label: 'Onpassealacte',
     owner: 'onpassealacte'
   }] };
 /**
@@ -405,6 +401,52 @@ var Template = (function () {
 })();
 'use strict';
 
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _slicedToArray(arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i['return']) _i['return'](); } finally { if (_d) throw _e; } } return _arr; } else { throw new TypeError('Invalid attempt to destructure non-iterable instance'); } }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+var Markdown = (function () {
+  function Markdown(content) {
+    _classCallCheck(this, Markdown);
+
+    this.content = content;
+    this.metas = {};
+    if (this._isMetas()) {
+      this._extractMetas();
+    }
+  }
+
+  _createClass(Markdown, [{
+    key: '_isMetas',
+    value: function _isMetas() {
+      return !!this.content.match(/---([\s\S]*?)---/);
+    }
+  }, {
+    key: '_extractMetas',
+    value: function _extractMetas() {
+      var _this = this;
+
+      this.content.match(/---([\s\S]*?)---/)[1].split('\n').filter(function (elt) {
+        return elt.trim();
+      }).map(function (elt) {
+        var _elt$match = elt.match(/([\s\S]*?): (.*)/);
+
+        var _elt$match2 = _slicedToArray(_elt$match, 3);
+
+        var key = _elt$match2[1];
+        var value = _elt$match2[2];
+
+        _this.metas[key.trim()] = value.trim();
+      });
+    }
+  }]);
+
+  return Markdown;
+})();
+'use strict';
+
 window.addEventListener('hashchange', function () {
   return window.location.reload(true);
 });
@@ -551,7 +593,7 @@ template.crews.data = function () {
     var link = _ref.link;
     var owner = _ref.owner;
     var classAttr = _ref.classAttr;
-    return '<li><a title="' + title + '" class="' + classAttr + '" href="#' + owner + '"' + (' data-owner="' + owner + '">' + label + '</a></li>');
+    return '<li><a title="' + title + '" class="' + classAttr + '" href="#' + owner + '"' + (' data-owner="' + owner + '"><h3>' + label + '</h3><p>' + title + '</p></a></li>');
   }).join('\n') + '</ul>');
 };
 'use strict';
@@ -619,8 +661,8 @@ template.crews.data = function () {
     var repoTpl = _ownerTpl$repoTpl$foldersTpl.repoTpl;
     var foldersTpl = _ownerTpl$repoTpl$foldersTpl.foldersTpl;
 
-    template.breadcrumb.html('<ul>\n        <li><a href="/">Accueil</a></li><!--\n        --><li><a href="' + ownerTpl.link + '">' + ownerTpl.label + '</a></li><!--\n        ' + (repoTpl.label ? '--><li><a href="' + repoTpl.link + '">' + repoTpl.label + '</a></li><!--' : '') + foldersTpl.map(function (folder) {
-      return '--><li><a href="' + folder.link + '">' + folder.label + '</a></li>';
+    template.breadcrumb.html('<ul>\n        <li><a href="/">Accueil</a></li>\n        <li><a href="' + ownerTpl.link + '">' + ownerTpl.label + '</a></li>\n        ' + (repoTpl.label ? '<li><a href="' + repoTpl.link + '">' + repoTpl.label + '</a></li>' : '') + foldersTpl.map(function (folder) {
+      return '<li><a href="' + folder.link + '">' + folder.label + '</a></li>';
     }).join('\n') + '</ul>');
   };
 }
@@ -664,28 +706,45 @@ template.crews.data = function () {
   template.create('repos');
 
   template.repos.data = function () {
-    var apiUrl = new GithubUrl(router.params).toGhRepoApiUrl();
-    fetch(apiUrl, { headers: { Accept: 'application/vnd.github.v3' } }).then(function (response) {
+    var reposUrl = new GithubUrl(router.params).toGhRepoApiUrl();
+    var html = [];
+    fetch(reposUrl, { headers: { Accept: 'application/vnd.github.v3' } }).then(function (response) {
       return response.json();
     }).then(function (json) {
       var ressources = json.map(function (_ref) {
         var name = _ref.name;
         var type = _ref.type;
         var html_url = _ref.html_url;
-        return {
-          name: name,
-          type: type,
-          git_url: html_url,
-          url: '' + html_url.match(/^https:\/\/github.com\/(.*)/)[1]
-        };
+        var url = _ref.url;
+
+        var readmeUrl = { owner: router.params.owner, repo: name, branch: 'master', path: 'README.md' };
+        var apiUrl = new GithubUrl(readmeUrl).toGhApiUrl();
+        fetch(apiUrl, { headers: { Accept: 'application/vnd.github.v3.raw' } }).then(function (response) {
+          return response.text();
+        }).then(function (md) {
+          var contribution = new Markdown(md);
+          contribution.fullMetas = contribution.metas;
+          contribution.fullMetas.name = name;
+          contribution.fullMetas.type = type;
+          contribution.fullMetas.url = html_url.replace('https://github.com/', '');
+          contribution.fullMetas.git_url = html_url;
+          contribution.fullMetas.readme_url = html_url.replace('https://github.com/', '') + '/blob/master/README.md';var _contribution$fullMetas = contribution.fullMetas;
+          name = _contribution$fullMetas.name;
+          type = _contribution$fullMetas.type;
+          bandeau_url = _contribution$fullMetas.bandeau_url;
+          url = _contribution$fullMetas.url;
+          git_url = _contribution$fullMetas.git_url;
+          readme_url = _contribution$fullMetas.readme_url;
+          description = _contribution$fullMetas.description;
+          contributeurs = _contribution$fullMetas.contributeurs;
+          dossiers = _contribution$fullMetas.dossiers;
+          fiches = _contribution$fullMetas.fiches;
+
+          html.push('<article class="gh-list-item gh-type-repo">\n                    <h2 class="gh-list-title"><a href="#' + url + '">' + name + '</a></h2>\n                    <div class="gh-list-meta">\n                      <p>Dossiers : ' + dossiers + ' - Fiches : ' + fiches + '</p>\n                      <p>Contributeurs : ' + contributeurs + '</p>\n                      </p>\n                      <p>\n                        <a href="' + git_url + '">Voir sur Github</a>\n                      </p>\n                    </div>\n                    <img src="' + (bandeau_url ? bandeau_url : 'http://lorempixel.com/g/350/150/') + '">\n                    <p class="gh-list-excerpt">' + description + '</p>\n                    <a class="gh-list-readmore"\n                        title="Lire la suite de la fiche Titre de la fiche"\n                        href="#' + readme_url + '">Lire la présentation complète</a>\n                  </article>');
+          template.repos.html(html.join('\n'));
+          template.repos.renderAsync(template.repos._htmlTpl);
+        });
       });
-      template.repos.html(ressources.map(function (_ref2) {
-        var name = _ref2.name;
-        var url = _ref2.url;
-        var git_url = _ref2.git_url;
-        return '<article class="gh-list-item gh-type-repo">\n               <h2 class="gh-list-title"><a href="#' + url + '">' + name + '</a></h2>\n               <div class="gh-list-meta">\n                 <p>Mis à jour : 02/02/16</p>\n                 <p>Créé par : <a href="">pntbr</a> / Contributeurs les plus actifs :\n                   <a href="">pntbr</a> / <a href="">wolffgang</a>\n                 </p>\n                 <p>\n                   <a href="' + git_url + '">Voir sur Github</a>\n                 </p>\n               </div>\n               <!--si <image--></image-->\n                 <img src="http://placehold.it/350x150">\n               <!--/si image-->\n               <p class="gh-list-excerpt">Le début de la fiche qui parle de ...</p>\n               <a class="gh-list-readmore"\n                  title="Lire la suite de la fiche Titre de la fiche"\n                  href="' + url + '">Lire la fiche</a>\n             </article>';
-      }).join('\n'));
-      template.repos.renderAsync(template.repos._htmlTpl);
     });
   };
 }

@@ -1,3 +1,9 @@
+---
+title: Code opensource de multiBàO
+description: Contient le code source de multiBàO, libre à vous de le réutiliser pour d'autres usages. A consulter sur GitHub.
+image_url: https://github.com/multibao/contributions/blob/master/media/daktary.jpg?raw=true
+---
+
 # Daktary
 
 Pré-prod : http://dev.multibao.org

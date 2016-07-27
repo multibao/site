@@ -530,7 +530,7 @@ var Template = (function () {
 var GH_SECRET = 'YWU0ZmRkZGFjOTVlZGM1ZTc1MmI3NjRjZTI3Y2UxZGYyMzdmZTdkZg==';
 var GH_ID = 'ODUzMjY1YjA5YjBjMjVlOTg2MTQ=';
 
-var OWNER = 'daktary-team';
+var OWNER = 'multibao';
 'use strict';
 
 window.addEventListener('hashchange', function () {
@@ -564,13 +564,13 @@ var layout = {};
 
 {
   layout.folders = new Layout('folders');
-  layout.folders.html('\n  <div id="search-engine-wrapper" class="search-engine-wrapper" data-template="search"></div>\n  <main class="container">\n    <div id="breadcrumb" class="breadcrumb" data-template="breadcrumb">\n    </div>\n    <section id="gh-list" class="gh-list" data-template="folders">\n    </section>\n  </main>');
+  layout.folders.html('\n  <header class="container">\n    <h1><a href="">multi<span>BàO</span></a></h1>\n    <div id="search-engine-wrapper" class="search-engine-wrapper" data-template="search"></div>\n  </header>\n  <main class="container">\n    <div id="breadcrumb" class="breadcrumb" data-template="breadcrumb">\n    </div>\n    <section id="gh-list" class="gh-list" data-template="folders">\n    </section>\n  </main>');
 }
 'use strict';
 
 {
   layout.home = new Layout('home');
-  layout.home.html('\n  <main>\n    <section class="home-intro">\n        <div class="home-intro-content container">\n          <h2>S\'inspirer des autres cultures<span>Rédiger et partager vos expériences</span></h2>\n          <a href="#multibao/contributions/blob/master/pages/commencer_ici.md">Commencer ici</a>\n          <a href="#multibao/documentation/blob/master/README.md">Guide d\'utilisation</a>\n        </div>\n    </section>\n    <section id="gh-crew-list" class="container">\n      <ul data-template="crews">\n      </ul>\n    </section>\n  </main>');
+  layout.home.html('\n  <main>\n    <header class="home-header container">\n      <h1><a href="">multi<span>BàO</span></a></h1>\n    </header>\n    <section class="home-intro">\n        <div class="home-intro-content container">\n          <h2>S\'inspirer des autres cultures<span>Rédiger et partager vos expériences</span></h2>\n          <a href="#multibao/contributions/blob/master/pages/commencer_ici.md">Commencer ici</a>\n          <a href="#multibao/documentation/blob/master/README.md">Guide d\'utilisation</a>\n        </div>\n    </section>\n    <section id="gh-crew-list" class="container">\n      <ul data-template="crews">\n      </ul>\n    </section>\n  </main>');
 }
 /**
  * Layout for manage and display Github repositories.
@@ -580,7 +580,7 @@ var layout = {};
 
 {
   layout.repos = new Layout('repos');
-  layout.repos.html('\n  <div id="search-engine-wrapper" class="search-engine-wrapper" data-template="search"></div>\n  <main class="container">\n    <div id="breadcrumb" class="breadcrumb" data-template="breadcrumb">\n    </div>\n    <section id="gh-list" class="gh-list" data-template="repos">\n    </section>\n  </main>');
+  layout.repos.html('\n  <header class="container">\n    <h1><a href="">multi<span>BàO</span></a></h1>\n    <div id="search-engine-wrapper" class="search-engine-wrapper" data-template="search"></div>\n  </header>\n  <main class="container">\n    <div id="breadcrumb" class="breadcrumb" data-template="breadcrumb">\n    </div>\n    <section id="gh-list" class="gh-list" data-template="repos">\n    </section>\n  </main>');
 }
 /**
  * Layout for manage and display Github repositories.
@@ -590,7 +590,7 @@ var layout = {};
 
 {
   layout.searchList = new Layout('searchList');
-  layout.searchList.html('\n  <div id="search-engine-wrapper" class="search-engine-wrapper" data-template="search"></div>\n  <main class="container">\n    <!--\n    <section class="search-result search-result-blank">\n    il n\'y a pas de résultat pour la recherche <span>agilité</span> dans le repo <a href=""> Super repo de démo</a>\n    </section>\n    <section class="search-result">\n      <span>3</span> résultat(s) pour la recherche <span>agilité</span> dans le repo <a href=""> Super repo de démo</a>\n    </section>\n    -->\n    <section id="gh-list" class="gh-list" data-template="searchList">\n    </section>\n  </main>');
+  layout.searchList.html('\n  <header class="container">\n      <h1><a href="">multi<span>BàO</span></a></h1>\n      <div id="search-engine-wrapper" class="search-engine-wrapper" data-template="search"></div>\n  </header>\n  <main class="container">\n    <!--\n    <section class="search-result search-result-blank">\n    il n\'y a pas de résultat pour la recherche <span>agilité</span> dans le repo <a href=""> Super repo de démo</a>\n    </section>\n    <section class="search-result">\n      <span>3</span> résultat(s) pour la recherche <span>agilité</span> dans le repo <a href=""> Super repo de démo</a>\n    </section>\n    -->\n    <section id="gh-list" class="gh-list" data-template="searchList">\n    </section>\n  </main>');
 }
 /**
 * Layout for manage and display Github contribution.

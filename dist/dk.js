@@ -21,8 +21,8 @@ var GithubUrl = (function () {
 
     this.ghData = {
       keys: {
-        secret: atob(GH_SECRET),
-        id: atob(GH_ID)
+        secret: atob(GH.SECRET),
+        id: atob(GH.ID)
       },
       owner: owner,
       repo: repo,
@@ -527,15 +527,13 @@ var Template = (function () {
 })();
 'use strict';
 
-var GH_SECRET = 'YWU0ZmRkZGFjOTVlZGM1ZTc1MmI3NjRjZTI3Y2UxZGYyMzdmZTdkZg==';
-var GH_ID = 'ODUzMjY1YjA5YjBjMjVlOTg2MTQ=';
-
-var OWNER = 'multibao';
-'use strict';
+var template = {};
+var layout = {};
 
 window.addEventListener('hashchange', function () {
   var ghUrl = window.location.toString().split('#')[1];
   var anchor = document.querySelector('a[name="' + ghUrl + '"]');
+  document.querySelector('.search-engine').style.display = '';
   if (anchor) {
     anchor.scrollIntoView();
     window.location = '#' + router.url;
@@ -553,9 +551,21 @@ window.addEventListener('load', function () {
     window.location = './404.html';
     window.location.reload(true);
   }
+  document.querySelector('#button-gh-search').addEventListener('click', function (evt) {
+    if (document.querySelector('#gh-search').value.length > 2) {
+      var userQuery = document.querySelector('#gh-search').value;
+      var apiUrl = new GithubUrl(router.params).toGhApiSearch(userQuery);
+      router.go(apiUrl.replace('https://api.github.com/', ''));
+    }
+  });
+  document.querySelector('#gh-search').addEventListener('keypress', function (evt) {
+    if (evt.key === 'Enter' && evt.target.value.length > 2) {
+      var userQuery = evt.target.value;
+      var apiUrl = new GithubUrl(router.params).toGhApiSearch(userQuery);
+      router.go(apiUrl.replace('https://api.github.com/', ''));
+    }
+  });
 });
-var template = {};
-var layout = {};
 /**
  * Layout for manage and display Github repositories.
  *
@@ -564,13 +574,13 @@ var layout = {};
 
 {
   layout.folders = new Layout('folders');
-  layout.folders.html('\n  <header class="container">\n    <h1><a href="">multi<span>BàO</span></a></h1>\n    <div id="search-engine-wrapper" class="search-engine-wrapper" data-template="search"></div>\n  </header>\n  <main class="container">\n    <div id="breadcrumb" class="breadcrumb" data-template="breadcrumb">\n    </div>\n    <section id="gh-list" class="gh-list" data-template="folders">\n    </section>\n  </main>');
+  layout.folders.html('\n<<<<<<< HEAD\n  <header class="container">\n    <h1><a href="">multi<span>BàO</span></a></h1>\n    <div id="search-engine-wrapper" class="search-engine-wrapper" data-template="search"></div>\n  </header>\n=======\n>>>>>>> b1492e017e7f8354af5c22db78417ef1a206130e\n  <main class="container">\n    <div id="breadcrumb" class="breadcrumb" data-template="breadcrumb">\n    </div>\n    <section id="gh-list" class="gh-list" data-template="folders">\n    </section>\n  </main>');
 }
 'use strict';
 
 {
   layout.home = new Layout('home');
-  layout.home.html('\n  <main>\n    <header class="home-header container">\n      <h1><a href="">multi<span>BàO</span></a></h1>\n    </header>\n    <section class="home-intro">\n        <div class="home-intro-content container">\n          <h2>S\'inspirer des autres cultures<span>Rédiger et partager vos expériences</span></h2>\n          <a href="#multibao/contributions/blob/master/pages/commencer_ici.md">Commencer ici</a>\n          <a href="#multibao/documentation/blob/master/README.md">Guide d\'utilisation</a>\n        </div>\n    </section>\n    <section id="gh-crew-list" class="container">\n      <ul data-template="crews">\n      </ul>\n    </section>\n  </main>');
+  layout.home.html('\n  <main>\n    <header class="home-header container">\n      <h1><a href="">multi<span>BàO</span></a></h1>\n    </header>\n    <section class="home-intro">\n        <div class="home-intro-content container">\n          <h2>' + MULTIBAO.UVP1 + '<span>' + MULTIBAO.UVP2 + '</span></h2>\n          <a href="#multibao/contributions/blob/master/pages/commencer_ici.md">' + MULTIBAO.BUTTON1 + '</a>\n          <a href="#multibao/documentation/blob/master/README.md">' + MULTIBAO.BUTTON2 + '</a>\n        </div>\n    </section>\n    <section id="gh-crew-list" class="container">\n      <ul data-template="crews">\n      </ul>\n    </section>\n  </main>');
 }
 /**
  * Layout for manage and display Github repositories.
@@ -580,7 +590,7 @@ var layout = {};
 
 {
   layout.repos = new Layout('repos');
-  layout.repos.html('\n  <header class="container">\n    <h1><a href="">multi<span>BàO</span></a></h1>\n    <div id="search-engine-wrapper" class="search-engine-wrapper" data-template="search"></div>\n  </header>\n  <main class="container">\n    <div id="breadcrumb" class="breadcrumb" data-template="breadcrumb">\n    </div>\n    <section id="gh-list" class="gh-list" data-template="repos">\n    </section>\n  </main>');
+  layout.repos.html('\n<<<<<<< HEAD\n  <header class="container">\n    <h1><a href="">multi<span>BàO</span></a></h1>\n    <div id="search-engine-wrapper" class="search-engine-wrapper" data-template="search"></div>\n  </header>\n=======\n>>>>>>> b1492e017e7f8354af5c22db78417ef1a206130e\n  <main class="container">\n    <div id="breadcrumb" class="breadcrumb" data-template="breadcrumb">\n    </div>\n    <section id="gh-list" class="gh-list" data-template="repos">\n    </section>\n  </main>');
 }
 /**
  * Layout for manage and display Github repositories.
@@ -590,7 +600,7 @@ var layout = {};
 
 {
   layout.searchList = new Layout('searchList');
-  layout.searchList.html('\n  <header class="container">\n      <h1><a href="">multi<span>BàO</span></a></h1>\n      <div id="search-engine-wrapper" class="search-engine-wrapper" data-template="search"></div>\n  </header>\n  <main class="container">\n    <!--\n    <section class="search-result search-result-blank">\n    il n\'y a pas de résultat pour la recherche <span>agilité</span> dans le repo <a href=""> Super repo de démo</a>\n    </section>\n    <section class="search-result">\n      <span>3</span> résultat(s) pour la recherche <span>agilité</span> dans le repo <a href=""> Super repo de démo</a>\n    </section>\n    -->\n    <section id="gh-list" class="gh-list" data-template="searchList">\n    </section>\n  </main>');
+  layout.searchList.html('\n<<<<<<< HEAD\n  <header class="container">\n      <h1><a href="">multi<span>BàO</span></a></h1>\n      <div id="search-engine-wrapper" class="search-engine-wrapper" data-template="search"></div>\n  </header>\n=======\n>>>>>>> b1492e017e7f8354af5c22db78417ef1a206130e\n  <main class="container">\n    <!--\n    <section class="search-result search-result-blank">\n    il n\'y a pas de résultat pour la recherche <span>agilité</span> dans le repo <a href=""> Super repo de démo</a>\n    </section>\n    <section class="search-result">\n      <span>3</span> résultat(s) pour la recherche <span>agilité</span> dans le repo <a href=""> Super repo de démo</a>\n    </section>\n    -->\n    <section id="gh-list" class="gh-list" data-template="searchList">\n    </section>\n  </main>');
 }
 /**
 * Layout for manage and display Github contribution.
@@ -610,6 +620,7 @@ var router = new Router();
 router.route('/', function () {
   this.currentRoute = 'home';
   layout.home.render();
+  document.querySelector('.search-engine').style.display = 'none';
 });
 router.route('search/code', function () {
   this.currentRoute = 'search';
@@ -685,7 +696,7 @@ router.route(':owner', function () {
       var content = _ref.content;
       var prose_url = _ref.prose_url;
       var git_url = _ref.git_url;
-      return '\n    <a name="top"></a>\n    <aside class="contribution-tools">\n      <a href="' + git_url + '" class="github-link">Voir sur Github</a>\n      <a href="' + prose_url + '" class="proseio-link">Editer sur prose.io</a>\n      <a href="#multibao/documentation/blob/master/README.md" class="help-link">Aide</a>\n      <a href="#top" class="page-top">Haut de page</a>\n    </aside>\n    <div id="parentRepo" class="breadcrumbs">\n      À retrouver dans le dépôt : <a href="' + link + '">' + label + '</a>\n    </div>\n    <article id="contribution">\n      ' + content + '\n    </article>\n  ';
+      return '\n    <a name="top"></a>\n    <aside class="contribution-tools">\n      <a href="' + git_url + '" data-tootik="Voir sur Github" class="github-link"></a>\n      <a href="' + prose_url + '" data-tootik="Editer sur prose.io" class="proseio-link"></a>\n      <a href="#multibao/documentation/blob/master/README.md" data-tootik="Aide" class="help-link"></a>\n      <a href="#top" class="page-top">Haut de page</a>\n    </aside>\n    <div id="parentRepo" class="breadcrumbs">\n      À retrouver dans le dépôt : <a href="' + link + '">' + label + '</a>\n    </div>\n    <article id="contribution">\n      ' + content + '\n    </article>\n  ';
     };
     template.contribution = new Template('contribution');
     template.contribution.data = function () {
@@ -730,14 +741,14 @@ router.route(':owner', function () {
 
     template.crews = new Template('crews');
     template.crews.data = function () {
-      var ghApi = new GithubUrl({ owner: OWNER, repo: 'organisations' });
+      var ghApi = new GithubUrl({ owner: GH.OWNER, repo: GH.CREW });
       var html = [];
       ghApi.getJsonFolders().then(function (jsonResponse) {
         jsonResponse.map(function (elt) {
           if (elt.name === 'README.md') {
             return;
           }
-          var readmeUrl = { owner: OWNER, repo: 'organisations', branch: 'master', path: elt.name };
+          var readmeUrl = { owner: GH.OWNER, repo: GH.CREW, branch: 'master', path: elt.name };
           var ghApiBlob = new GithubUrl(readmeUrl);
           ghApiBlob.getMdBlob().then(function (mdResponse) {
             var contribution = new Markdown(mdResponse);
@@ -929,30 +940,6 @@ router.route(':owner', function () {
       });
     };
   })();
-}
-'use strict';
-
-{
-  template.search = new Template('search');
-  template.search.data = function () {
-    template.search.html('\n      <div class="search-engine">\n        <fieldset>\n          <input id="gh-search" type="text" placeholder="Recherche">\n          <input id="button-gh-search" value="Rechercher" type="submit">\n        </fieldset>\n      </div>\n    ');
-    template.search.events({
-      'click #button-gh-search': function clickButtonGhSearch() {
-        if (document.querySelector('#gh-search').value.length > 2) {
-          var userQuery = document.querySelector('#gh-search').value;
-          var apiUrl = new GithubUrl(router.params).toGhApiSearch(userQuery);
-          router.go(apiUrl.replace('https://api.github.com/', ''));
-        }
-      },
-      'keypress #gh-search': function keypressGhSearch(evt) {
-        if (evt.key === 'Enter' && evt.target.value.length > 2) {
-          var userQuery = evt.target.value;
-          var apiUrl = new GithubUrl(router.params).toGhApiSearch(userQuery);
-          router.go(apiUrl.replace('https://api.github.com/', ''));
-        }
-      }
-    });
-  };
 }
 'use strict';
 

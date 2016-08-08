@@ -574,13 +574,13 @@ window.addEventListener('load', function () {
 
 {
   layout.folders = new Layout('folders');
-  layout.folders.html('\n<<<<<<< HEAD\n  <header class="container">\n    <h1><a href="">multi<span>BàO</span></a></h1>\n    <div id="search-engine-wrapper" class="search-engine-wrapper" data-template="search"></div>\n  </header>\n=======\n>>>>>>> b1492e017e7f8354af5c22db78417ef1a206130e\n  <main class="container">\n    <div id="breadcrumb" class="breadcrumb" data-template="breadcrumb">\n    </div>\n    <section id="gh-list" class="gh-list" data-template="folders">\n    </section>\n  </main>');
+  layout.folders.html('\n  <main class="container">\n    <div id="breadcrumb" class="breadcrumb" data-template="breadcrumb">\n    </div>\n    <section id="gh-list" class="gh-list" data-template="folders">\n    </section>\n  </main>');
 }
 'use strict';
 
 {
   layout.home = new Layout('home');
-  layout.home.html('\n  <main>\n    <header class="home-header container">\n      <h1><a href="">multi<span>BàO</span></a></h1>\n    </header>\n    <section class="home-intro">\n        <div class="home-intro-content container">\n          <h2>' + MULTIBAO.UVP1 + '<span>' + MULTIBAO.UVP2 + '</span></h2>\n          <a href="#multibao/contributions/blob/master/pages/commencer_ici.md">' + MULTIBAO.BUTTON1 + '</a>\n          <a href="#multibao/documentation/blob/master/README.md">' + MULTIBAO.BUTTON2 + '</a>\n        </div>\n    </section>\n    <section id="gh-crew-list" class="container">\n      <ul data-template="crews">\n      </ul>\n    </section>\n  </main>');
+  layout.home.html('\n  <main>\n    <section class="home-intro">\n        <div class="home-intro-content container">\n          <h2>' + MULTIBAO.UVP1 + '<span>' + MULTIBAO.UVP2 + '</span></h2>\n          <a href="#multibao/contributions/blob/master/pages/commencer_ici.md">' + MULTIBAO.BUTTON1 + '</a>\n          <a href="#multibao/documentation/blob/master/README.md">' + MULTIBAO.BUTTON2 + '</a>\n        </div>\n    </section>\n    <section id="gh-crew-list" class="container">\n      <ul data-template="crews">\n      </ul>\n    </section>\n  </main>');
 }
 /**
  * Layout for manage and display Github repositories.
@@ -590,7 +590,7 @@ window.addEventListener('load', function () {
 
 {
   layout.repos = new Layout('repos');
-  layout.repos.html('\n<<<<<<< HEAD\n  <header class="container">\n    <h1><a href="">multi<span>BàO</span></a></h1>\n    <div id="search-engine-wrapper" class="search-engine-wrapper" data-template="search"></div>\n  </header>\n=======\n>>>>>>> b1492e017e7f8354af5c22db78417ef1a206130e\n  <main class="container">\n    <div id="breadcrumb" class="breadcrumb" data-template="breadcrumb">\n    </div>\n    <section id="gh-list" class="gh-list" data-template="repos">\n    </section>\n  </main>');
+  layout.repos.html('\n  <main class="container">\n    <div id="breadcrumb" class="breadcrumb" data-template="breadcrumb">\n    </div>\n    <section id="gh-list" class="gh-list" data-template="repos">\n    </section>\n  </main>');
 }
 /**
  * Layout for manage and display Github repositories.
@@ -600,7 +600,7 @@ window.addEventListener('load', function () {
 
 {
   layout.searchList = new Layout('searchList');
-  layout.searchList.html('\n<<<<<<< HEAD\n  <header class="container">\n      <h1><a href="">multi<span>BàO</span></a></h1>\n      <div id="search-engine-wrapper" class="search-engine-wrapper" data-template="search"></div>\n  </header>\n=======\n>>>>>>> b1492e017e7f8354af5c22db78417ef1a206130e\n  <main class="container">\n    <!--\n    <section class="search-result search-result-blank">\n    il n\'y a pas de résultat pour la recherche <span>agilité</span> dans le repo <a href=""> Super repo de démo</a>\n    </section>\n    <section class="search-result">\n      <span>3</span> résultat(s) pour la recherche <span>agilité</span> dans le repo <a href=""> Super repo de démo</a>\n    </section>\n    -->\n    <section id="gh-list" class="gh-list" data-template="searchList">\n    </section>\n  </main>');
+  layout.searchList.html('\n  <main class="container">\n    <!--\n    <section class="search-result search-result-blank">\n    il n\'y a pas de résultat pour la recherche <span>agilité</span> dans le repo <a href=""> Super repo de démo</a>\n    </section>\n    <section class="search-result">\n      <span>3</span> résultat(s) pour la recherche <span>agilité</span> dans le repo <a href=""> Super repo de démo</a>\n    </section>\n    -->\n    <section id="gh-list" class="gh-list" data-template="searchList">\n    </section>\n  </main>');
 }
 /**
 * Layout for manage and display Github contribution.
@@ -629,6 +629,7 @@ router.route('search/code', function () {
 router.route(':owner/:repo/blob/:branch/:path(.*)', function () {
   this.currentRoute = 'blob';
   layout.viewer.render();
+  document.querySelector('header').style.display = 'none';
 });
 router.route(':owner/:repo/tree/:branch/:path(.*)?', function () {
   this.currentRoute = 'tree';

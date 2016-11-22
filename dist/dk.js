@@ -583,14 +583,14 @@ window.addEventListener('load', function () {
   document.querySelector('#button-gh-search').addEventListener('click', function (evt) {
     if (document.querySelector('#gh-search').value.length > 2) {
       var userQuery = document.querySelector('#gh-search').value;
-      var apiUrl = new GithubUrl(router.params).toGhApiSearch(userQuery);
+      var apiUrl = new GithubUrl(router.params).toGithubApiSearch(userQuery);
       router.go(apiUrl.replace('https://api.github.com/', ''));
     }
   });
   document.querySelector('#gh-search').addEventListener('keypress', function (evt) {
     if (evt.key === 'Enter' && evt.target.value.length > 2) {
       var userQuery = evt.target.value;
-      var apiUrl = new GithubUrl(router.params).toGhApiSearch(userQuery);
+      var apiUrl = new GithubUrl(router.params).toGithubApiSearch(userQuery);
       router.go(apiUrl.replace('https://api.github.com/', ''));
     }
   });
